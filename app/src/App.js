@@ -4,7 +4,7 @@ import Stock from './components/Stock';
 function App() {
   return (
     <div className="App">
-      <Stock ticker="AAPL"/>
+      <Stock/>
     </div>
   );
 }
