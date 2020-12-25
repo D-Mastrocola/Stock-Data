@@ -13,11 +13,9 @@ class Stock extends Component {
         text: "AAPL",
         fontFamily: "times new roman"
       },
-      height: 400,
       zoomEnabled: true,
       axisY: {
         includeZero: false,
-        title: "Prices",
         prefix: "$ "
       },
       axisX: {
@@ -29,16 +27,23 @@ class Stock extends Component {
       data: [
         {
           type: "candlestick",
-          risingColor: "#327a0c",
-          fallingColor: "#d21921",
-          color: "#666",
           dataPoints: dataPoints
         }
       ]
     }
     return (
-      <div className='stock' id>
-        <div className='stock-info-container'></div>
+      <div className='stock'>
+        <div className='stock-card'>
+           <h2>AAPL</h2>
+           <ul className='stock-info-container'>
+             <li className='stock-info'>Price: </li>
+             <li className='stock-info'>High:</li>
+             <li className='stock-info'>Low:</li>
+             <li className='stock-info'>Open:</li>
+             <li className='stock-info'>Previous Close:</li>
+             <li className='stock-info'><img className='down-arrow' src='./images/down-arrow.svg' /></li>
+           </ul>
+        </div>
         <div className='graph-container'>
           <CanvasJSChart options={options}
             onRef={ref => this.chart = ref}
@@ -47,15 +52,10 @@ class Stock extends Component {
       </div>
     );
   }
-  realDate(utcDate) {
-    //Formats it in milliseconds
-    let date = new Date(utcDate * 1000);
-    return (date);
-  }
   componentDidMount() {
     let request = new XMLHttpRequest()
     var chart = this.chart;
-    let yearInSecs = 31_536_000;
+    let yearInSecs = 31_536_000/2;
     let dateTo = Math.floor(Date.now() / 1000);
     let dateFrom = Math.floor(Date.now() / 1000) - yearInSecs;
 
@@ -67,7 +67,6 @@ class Stock extends Component {
       for (let i = 0; i < data.t.length; i++) {
         let date = new Date(data.t[i] * 1000);
         dataPoints.push({ x: date, y: [data.o[i], data.h[i], data.l[i], data.c[i]] })
-        chart.render();
       }
       chart.render();
       console.log(dataPoints);
