@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <Stock title='Apple Inc' ticker='AAPL' />
-      <Stock/>
+      <Stock title='Microsoft' ticker='MSFT' />
     </div>
   );
 }
