@@ -9,7 +9,8 @@ body,
 .App {
   width: 100%;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .stock {
   width: 70%;
@@ -20,6 +21,8 @@ body,
 .graph-container {
   width: 75%;
   margin: 0 0 0 25%;
+  height: 0;
+  opacity: 0;
 }
 .stock-card {
   display: flex;
