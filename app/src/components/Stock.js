@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import CanvasJSReact from '../canvasjs.react';
 
+let CanvasJS = CanvasJSReact.CanvasJS;
 let CanvasJSChart = CanvasJSReact.CanvasJSChart;
 let dataPoints = [];
-
+let options;
 class Stock extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +21,7 @@ class Stock extends Component {
     };
   }
   render() {
-    const options = { 
+    let options = {
       theme: 'light2',
       title: {
         text: this.state.title,
@@ -55,14 +56,16 @@ class Stock extends Component {
             <li className='stock-info' id={this.state.lowID}>Low:</li>
             <li className='stock-info' id={this.state.openID}>Open:</li>
             <li className='stock-info' id={this.state.previousCloseID}>Previous Close:</li>
-            <li className='stock-info' id={this.state.dropDownID}><img className='down-arrow' src='./images/down-arrow.svg' /></li>
           </ul>
         </div>
         <div className='graph-container'>
-          <CanvasJSChart 
-            options={options}
-            onRef={ref => this.chart = ref}
-          />
+          <div className={this.state.graphID}>
+            <CanvasJSChart
+              options={options}
+              onRef={ref => this.chart = ref}
+              id={this.state.ticker}
+            />
+          </div>
         </div>
       </div>
     );
@@ -93,13 +96,13 @@ class Stock extends Component {
     request.open('GET', 'https://finnhub.io/api/v1/stock/candle?symbol=' + this.state.ticker + '&resolution=D&from=' + dateFrom + '&to=' + dateTo + '&token=buc39mf48v6oa2u4eqvg');
     request.send();
     request.onload = function () {
+      console.log(chart.data[0].dataPoints);
       let data = JSON.parse(this.response);
       for (let i = 0; i < data.t.length; i++) {
         let date = new Date(data.t[i] * 1000);
         dataPoints.push({ x: date, y: [data.o[i], data.h[i], data.l[i], data.c[i]] });
       }
       chart.render();
-      console.log(dataPoints);
     }
   }
 }

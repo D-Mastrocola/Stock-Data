@@ -38,11 +38,8 @@ body,
   padding: 0;
 }
 .stock-info {
-  width: 16.6%;
+  width: 18.8%;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.down-arrow {
-  width: 40px;
 }
