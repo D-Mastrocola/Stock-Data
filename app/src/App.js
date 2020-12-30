@@ -5,9 +5,8 @@ import TestChart from './components/testChart';
 function App() {
   return (
     <div className="App">
-      <Stock title='Apple Inc' ticker='AAPL' />
       <Stock title='Microsoft' ticker='MSFT' />
-      <TestChart />
+      <TestChart title='Apple Inc' ticker='AAPL'/>
     </div>
   );
 }
