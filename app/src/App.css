@@ -81,3 +81,27 @@ body,
   align-items: center;
   justify-content: center;
 }
+@media (max-width: 800px) {
+  .stock-card {
+    flex-direction: column;
+  }
+  .stock-card h2 {
+    width: 100%;
+    font-size: 2em;
+  }
+  .stock-info-container {
+    width: 100%;
+    font-size: .75em;
+  }
+  .stock-info-container li {
+    text-align: center;
+    padding: .1em;
+  }
+  .timeframe-container {
+    width: 100%;
+  }
+  .timeframe-list {
+    width: 100%;
+    font-size: .9em;
+  }
+}
